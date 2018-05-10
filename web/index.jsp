@@ -6,6 +6,7 @@
             <a href="login.jsp">Entrar</a>            
         </h3>        
         <c:import url="/rodape.jsp"/>
+	<h1> TESTE <h1>
     </body>
 </html>
 
