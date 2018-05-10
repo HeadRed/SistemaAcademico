@@ -16,24 +16,41 @@
  */
 package com.br.phdev.jdbc.dao;
 
-import com.br.phdev.jdbc.modelo.Aluno;
+import br.com.phdev.exceptions.DAOException;
+import com.br.phdev.jdbc.modelo.Usuario;
 import java.sql.Connection;
-import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author Paulo Henrique Gonçalves Bacelar
  */
-public class AlunoDAO{
-    
+public class LoginDAO {
+
     private Connection connection;
-    
-    public AlunoDAO(Connection connection) {
+
+    public LoginDAO(Connection connection) {
         this.connection = connection;
     }
-    
-    public void adiciona(Aluno aluno) {
-        
+
+    public void autentica(Usuario usuario) {
+        try {
+            String sql = "SELECT FROM login WHERE loginUsuario=?";
+            PreparedStatement stmt = this.connection.prepareCall(sql);
+            stmt.setString(1, usuario.getLoginUsuario());
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs != null) {
+                System.out.println("EXISTE");
+            }
+            
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+
     }
-                  
+
 }

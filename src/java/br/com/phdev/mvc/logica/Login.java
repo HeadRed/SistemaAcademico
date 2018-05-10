@@ -14,26 +14,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.br.phdev.jdbc.dao;
+package br.com.phdev.mvc.logica;
 
-import com.br.phdev.jdbc.modelo.Aluno;
+import com.br.phdev.jdbc.dao.LoginDAO;
+import com.br.phdev.jdbc.modelo.Usuario;
 import java.sql.Connection;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  * @author Paulo Henrique Gonçalves Bacelar
  */
-public class AlunoDAO{
-    
-    private Connection connection;
-    
-    public AlunoDAO(Connection connection) {
-        this.connection = connection;
-    }
-    
-    public void adiciona(Aluno aluno) {
+public class Login implements Logica{
+
+    @Override
+    public String executa(HttpServletRequest request, HttpServletResponse response) {
+        /*
+        String loginUsuario = request.getParameter("usuario");
+        String loginSenha = request.getParameter("senha");
+
+        Usuario usuario = new Usuario();
+        usuario.setLoginUsuario(loginUsuario);
+        usuario.setLoginSenha(loginSenha);
         
+        Connection conexao = (Connection)request.getAttribute("conexao");
+                
+        new LoginDAO(conexao).autentica(usuario);
+        */
+        return "/WEB-INF/adiciona-aluno.jsp";
     }
-                  
+    
 }

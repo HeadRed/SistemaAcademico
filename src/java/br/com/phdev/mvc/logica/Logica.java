@@ -14,31 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.br.phdev.jdbc.modelo;
+package br.com.phdev.mvc.logica;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  * @author Paulo Henrique Gonçalves Bacelar
  */
-public class Usuario {
+public interface Logica {
     
-    private String loginUsuario;
-    private String loginSenha;
-
-    public String getLoginUsuario() {
-        return loginUsuario;
-    }
-
-    public void setLoginUsuario(String loginUsuario) {
-        this.loginUsuario = loginUsuario;
-    }
-
-    public String getLoginSenha() {
-        return loginSenha;
-    }
-
-    public void setLoginSenha(String loginSenha) {
-        this.loginSenha = loginSenha;
-    }
-        
+    public String executa(HttpServletRequest request, HttpServletResponse response);
+    
 }
