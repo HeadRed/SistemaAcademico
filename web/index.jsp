@@ -3,35 +3,54 @@
     <head>
         <title>Sistema Academico</title>
         <meta charset="utf-8">
-     	<!--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> -->
-
-        <!--nem sei se vou usar isso <c:import url="/cabecalho.jsp"/>-->
-        <!--Isso vem depois, vamos por parte <a href="login.jsp">Entrar</a>-->
-        <!--Um footer zoado  <c:import url="/rodape.jsp"/>-->    
+        <!--JSP-->
+     	<!-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> -->
+     	<!--jQuery-->
+        
+     	<!--bootstrap-->
+     	<link rel="stylesheet" href="style/css/bootstrap.min.css">
+     	<!--HTML5SHIV-->
+        <!--[if lt IE 9]>
+			<script src="js/html5shiv.js"></script>
+		<![endif]-->
+    	<style>
+			.parallax {
+   				/* The image used */
+    			background-image: url("img/educa.jpg");
+    			/* Set a specific height */
+   				 min-height: 500px; 
+    			/* Create the parallax scrolling effect */
+    			background-attachment: fixed;
+    			background-position: center;
+    			background-repeat: no-repeat;
+   				 background-size: cover;
+			}
+			.
+</style>
     </head>
-    <body>
-        <div style="color: #FFFF00; height: 300px; width: auto; text-align: center; background: #8B0000;">
-            <h4>TESTE</h4>
-            <img style="height:150px; width: auto;" src="memeph.png">
-            <img style="height:150px; width: auto;" src="memeph.png">
-            <img style="height:150px; width: auto;" src="memeph.png">
-            <img style="height:150px; width: auto;" src="memeph.png">
-            <img style="height:150px; width: auto;" src="memeph.png">
-            <img style="height:150px; width: auto;" src="memeph.png">
-            <img style="height:150px; width: auto;" src="memeph.png">
-            <img style="height:150px; width: auto;" src="memeph.png">
-            <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fringilla, metus in venenatis mollis, augue tellus pretium nisl, quis consectetur enim ligula non sem. Nam eget maximus ligula. Quisque non ante nunc. Ut viverra ullamcorper diam, eget dignissim nibh semper blandit. Curabitur sit amet urna et eros fringilla ornare. Donec sit amet justo a augue cursus posuere. </p>
-			<button style="">Um teste muito loko</button>
-        </div>
-        <br>
-        <div style="text-align: center; color: black; height: 300px; width: auto; background: #7D26CD">
-        	<h3>AGORA EU VOU DORMIR</h3>
-        	<img style="height: 150px; width: auto;" src="meme.png">
-        	<img style="height: 150px; width: auto;" src="meme.png">
-        	<img style="height: 150px; width: auto;" src="meme.png">
-        	<img style="height: 150px; width: auto;" src="meme.png">
-        	<img style="height: 150px; width: auto;" src="meme.png"> 
-        </div>
+    <body> 
+    <!--NAV-->
+    <nav class="navbar navbar-default">
+  		<div class="container-fluid">
+    		<div class="navbar-header">
+      			<a class="navbar-brand" href="#">
+        			<img alt="Brand" src="img/Creeper.png" style="width: 35px; height: 35px; text-align: center;">
+      			</a>
+    		</div>
+  		</div>
+	</nav>
+	<!--Fim da nav-->
+	<!--Conteudo-->
+	<div class="jumbotron parallax">
+	</div>
+	<div class="page-header">
+            <h1 style="text-align: center;">Sistema Academico<small></small></h1>
+                
+	</div>
+	
+	<div style="">
+		
+	</div>
+	<!--->
     </body>
 </html>
