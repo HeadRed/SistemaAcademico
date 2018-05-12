@@ -20,8 +20,8 @@
 
     </head>
     <body> 
-        <div>
-            <div class="col-sm-4" style="text-align: center;">
+        <div style="position: absolute; left: 35%;">
+            <div class="col-sm-12">
                 <h3>Logar</h3>
 
                 <div class="form-group">

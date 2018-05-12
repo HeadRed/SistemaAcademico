@@ -35,9 +35,11 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
-                        <img alt="Brand" src="img/Creeper.png" style="width: 35px; height: 35px; text-align: center;">
-                    </a>
+                    <ul class="nav nav-pills">
+                        <li role="presentation" class="active"><a href="#">Home</a></li>
+                        <li role="presentation"><a href="#">Profile</a></li>
+                        <li role="presentation"><a href="#">Messages</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
