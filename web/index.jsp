@@ -1,61 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <title>Sistema Academico</title>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
         <!--JSP-->
         <!-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> -->
-        <!--CSS-->
-        <style type="text/css">
-            .thumbnails {
-                text-align:center;
-            }
-
-            .thumbnails > li {
-                display: inline-block;
-                *display:inline; /* ie7 fix */
-                float: none; /* this is the part that makes it work */
-            }
-            #centro{
-                position: absolute; 
-                left: 19%; 
-            }
-        </style>
-        <!--jQuery-->
-
-        <!--bootstrap-->
-        <link rel="stylesheet" href="style/css/bootstrap.min.css">
-        <!--HTML5SHIV-->
-        <!--[if lt IE 9]>
-                        <script src="js/html5shiv.js"></script>
-                <![endif]-->
+        <title>Sistema Academico</title>
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Custom styles for this template -->
+        <link href="cover.css" rel="stylesheet">
     </head>
-    <body> 
-        <!--NAV-->
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <ul class="nav nav-pills">
-                        <li role="presentation" class="active"><a href="#">Home</a></li>
-                        <li role="presentation"><a href="#">Profile</a></li>
-                        <li role="presentation"><a href="#">Messages</a></li>
-                    </ul>
+    <body class="text-center"> 
+        <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+            <header class="masthead mb-auto">
+                <div class="inner">
+                    <h3 class="masthead-brand">Sistema Academico</h3>
+                    <nav class="nav nav-masthead justify-content-center">
+                        <a class="nav-link active" href="index.jsp">Home</a>
+                        <a class="nav-link" href="cabecalho.jsp">Cabeçalho</a>
+                        <a class="nav-link" href="login.jsp">Login</a>
+                    </nav>
                 </div>
-            </div>
-        </nav>
-        <!--Fim da nav-->
-        <div id="centro" class="row">
-            <div class="col-sm-8 col-md-8">
-                <div class="thumbnail " style="text-align: center;">
-                    <img src="img/educacao.gif" alt="Imagem Educação">
-                    <div class="caption">
-                        <h3>Sistema Academico</h3>
-                        <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI,
-                            quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.</p>
-                        <p><a href="login.jsp" class="btn btn-primary" role="button">Login</a> <a href="cabecalho.jsp" class="btn btn-default" role="button">Cabeçalho</a></p>
-                    </div>
+            </header>
+
+            <main role="main" class="inner cover">
+                <h1 class="cover-heading">Sistema Academico</h1>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pellentesque tortor sit amet tincidunt lobortis. Etiam vestibulum posuere ex, sit amet tincidunt ex convallis id.</p>
+                <p class="lead">
+                    <a href="login.jsp" class="btn btn-lg btn-secondary">Entrar</a>
+                </p>
+            </main>
+
+            <footer class="mastfoot mt-auto">
+                <div class="inner">
+                    <p>Disponivel em <a href="https://github.com/henrique-dev/SistemaAcademico">GitHub</a>, por <a href="https://twitter.com/mendessmatheus">@mendessmatheus</a> e <a href="https://github.com/henrique-dev">@Henrique-dev</a>.</p>
                 </div>
-            </div>
+            </footer>
         </div>
+
+
     </body>
 </html>

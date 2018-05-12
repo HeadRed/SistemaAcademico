@@ -1,39 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <title>Login</title>
+
         <meta charset="utf-8">
-        <!--JSP-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
         <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <c:import url="/cabecalho.jsp"/>
-        <style type="text/css">
-
-        </style>
-        <!--jQuery-->
-
-        <!--bootstrap-->
-        <link rel="stylesheet" href="style/css/bootstrap.min.css">
-        <!--HTML5SHIV-->
-        <!--[if lt IE 9]>
-            <script src="js/html5shiv.js"></script>
-        <![endif]-->
-
+        <title>Login</title>
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Custom styles for this template -->
+        <link href="signin.css" rel="stylesheet"> 
     </head>
-    <body> 
-        <div style="position: absolute; left: 35%;">
-            <div class="col-sm-12">
-                <h3>Logar</h3>
-
-                <div class="form-group">
-                    <input type="Email" class="form-control" id="email" placeholder="Digite seu email">   
-                </div>
-
-                <div class="form-group">
-                    <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
-                </div>
-                <button type="submit" class="btn btn-primary">Entrar</button>
+    <body class="text-center"> 
+        <form class="form-signin">
+            <img class="mb-4" src="https://blog.clippingcacd.com.br/wp-content/uploads/2015/08/Imagem_para_texto_Bruno.png" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Entrar</h1>
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" class="sr-only">Senha</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Lembra-me
+                </label>
             </div>
-
-        </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+        </form>
     </body>
 </html>
