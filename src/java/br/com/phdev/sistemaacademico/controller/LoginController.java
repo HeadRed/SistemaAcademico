@@ -9,11 +9,8 @@ import br.com.phdev.sistemaacademico.dao.UsuarioDAO;
 import br.com.phdev.sistemaacademico.jdbc.ConnectionFactory;
 import br.com.phdev.sistemaacademico.modelos.Aluno;
 import br.com.phdev.sistemaacademico.modelos.Usuario;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -28,9 +25,9 @@ public class LoginController {
         return "redirect:entrar";
     }
     
-    @RequestMapping
+    @RequestMapping("entrar")
     public String entrar() {
-        return "login/form";
+        return "login/form-login";
     }
     
     @RequestMapping("autenticar")

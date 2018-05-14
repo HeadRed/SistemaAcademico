@@ -40,7 +40,7 @@ public class MenuController {
         model.addAttribute("aluno", aluno);
         model.addAttribute("disciplinas", lista);
         model.addAttribute("path", new Path("principal"));
-        return "menu/principal";
+        return "principal/home";
     }
     
 }
