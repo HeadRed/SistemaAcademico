@@ -17,7 +17,7 @@
     <body class="text-center"> 
         <form class="form-signin" action="autenticar" method="post">
             <img class="mb-4" src="https://blog.clippingcacd.com.br/wp-content/uploads/2015/08/Imagem_para_texto_Bruno.png" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">Entrar</h1>
+            <h1 style="color: white;" class="h3 mb-3 font-weight-normal">Entrar</h1>
             <label for="inputEmail" class="sr-only">Email</label>
             <input type="email" name="loginNome" class="form-control" placeholder="Email address" required autofocus>
             <label for="inputPassword" class="sr-only">Senha</label>
@@ -27,7 +27,7 @@
                     <input type="checkbox" value="remember-me"> Lembra-me
                 </label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block btn btn-lg btn-secondary" type="submit">Entrar</button>
             <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
         </form>
     </body>
