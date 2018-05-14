@@ -39,7 +39,7 @@ public class LoginController {
                 //request.setAttribute("aluno", (Aluno)novoUsuario);
                 //model.addAttribute("aluno", (Aluno)novoUsuario);
                 session.setAttribute("aluno", (Aluno)novoUsuario);
-                return "redirect:principal";
+                return "redirect:home";
             }
         }
         return "redirect:entrar";

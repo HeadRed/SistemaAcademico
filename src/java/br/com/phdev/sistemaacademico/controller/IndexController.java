@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
     
-    @RequestMapping("index")
-    public String index() {
+    @RequestMapping(value = {"", "index"})
+    public String indexG() {
+        return "redirect:principal";
+    }
+    
+    @RequestMapping("principal")
+    public String principal() {
         return "index";
     }
     

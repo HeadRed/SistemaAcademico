@@ -31,7 +31,7 @@ public class MenuController {
         return "redirect:principal";
     }
     
-    @RequestMapping("principal")
+    @RequestMapping("home")
     public String principal(HttpSession session, Model model) {
         Aluno aluno = (Aluno)session.getAttribute("aluno");               
         Turma turma = new TurmaDAO(new ConnectionFactory().getConnection()).get(aluno.getTurma());     
