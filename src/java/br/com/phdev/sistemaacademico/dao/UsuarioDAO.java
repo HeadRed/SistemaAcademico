@@ -6,6 +6,7 @@
 package br.com.phdev.sistemaacademico.dao;
 
 import br.com.phdev.sistemaacademico.modelos.Aluno;
+import br.com.phdev.sistemaacademico.modelos.Professor;
 import br.com.phdev.sistemaacademico.modelos.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,7 +43,12 @@ public class UsuarioDAO extends BasicDAO {
                     super.close();
                     return new Aluno(loginNome, nome, turma);
                 } else if (tipo.equals("professor")) {
-
+                    String loginNome = usuario.getLoginNome();
+                    String nome = rs.getString("nome");
+                    rs.close();
+                    stmt.close();
+                    super.close();
+                    return new Professor(loginNome, nome);
                 } else if (tipo.equals("administrador")) {
 
                 }

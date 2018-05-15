@@ -8,6 +8,7 @@ package br.com.phdev.sistemaacademico.controller;
 import br.com.phdev.sistemaacademico.dao.UsuarioDAO;
 import br.com.phdev.sistemaacademico.jdbc.ConnectionFactory;
 import br.com.phdev.sistemaacademico.modelos.Aluno;
+import br.com.phdev.sistemaacademico.modelos.Professor;
 import br.com.phdev.sistemaacademico.modelos.Usuario;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -36,11 +37,12 @@ public class LoginController {
         UsuarioDAO dao = new UsuarioDAO(new ConnectionFactory().getConnection());
         Usuario novoUsuario = dao.verificarExistencia(usuario);
         if (novoUsuario != null) {                        
-            if (novoUsuario instanceof Aluno) {                      
-                //request.setAttribute("aluno", (Aluno)novoUsuario);
-                //model.addAttribute("aluno", (Aluno)novoUsuario);
+            if (novoUsuario instanceof Aluno) {                
                 session.setAttribute("aluno", (Aluno)novoUsuario);
-                return "redirect:home";
+                return "redirect:homeAluno";
+            } else if (novoUsuario instanceof Professor) {
+                session.setAttribute("professor", (Professor)novoUsuario);
+                return "redirect:homeProfessor";
             }
         }
         model.addAttribute("erro", true);

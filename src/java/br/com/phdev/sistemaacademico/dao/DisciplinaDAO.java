@@ -5,7 +5,9 @@
  */
 package br.com.phdev.sistemaacademico.dao;
 
+import br.com.phdev.sistemaacademico.exceptions.DAOException;
 import br.com.phdev.sistemaacademico.modelos.Disciplina;
+import br.com.phdev.sistemaacademico.modelos.Professor;
 import br.com.phdev.sistemaacademico.modelos.Turma;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,8 +53,91 @@ public class DisciplinaDAO extends BasicDAO {
             return disciplinas;
         } catch (SQLException e) {
             super.close();
-            throw new RuntimeException(e);
-        }        
+            throw new DAOException(e);
+        }
+    }
+    
+    public List<Disciplina> getDisciplinas(Integer idCurso, Professor professor) {
+        try {
+            List<Disciplina> disciplinas = new ArrayList<>();
+            String sql = "SELECT * FROM disciplina WHERE curso_fk=? and professor_fk=?";
+
+            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            stmt.setInt(1, idCurso);            
+            stmt.setString(2, professor.getLoginNome());
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Disciplina disciplina = new Disciplina();
+                disciplina.setIdDisciplina(rs.getInt("idDisciplina"));
+                disciplina.setNome(rs.getString("nome"));                
+                disciplina.setCurso(rs.getString("curso_fk"));                
+                disciplinas.add(disciplina);
+            }
+
+            rs.close();
+            stmt.close();
+            super.close();
+            return disciplinas;
+        } catch (SQLException e) {
+            super.close();
+            throw new DAOException(e);
+        }
+    }
+
+    public List<Integer> getIdDisciplinas(String key) {
+        List<Integer> disciplinas;
+        try {
+            disciplinas = new ArrayList<>();
+
+            String sql = "SELECT * FROM disciplina WHERE professor_fk=?";
+
+            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            stmt.setString(1, key);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int idDisciplina = rs.getInt("idDisciplina");
+                disciplinas.add(idDisciplina);
+            }
+
+            rs.close();
+            stmt.close();
+            super.close();
+        } catch (SQLException e) {
+            super.close();
+            throw new DAOException(e);
+        }
+        return disciplinas;
+    }
+    
+    public List<Integer> getIdDisciplinas(int idCurso) {
+        List<Integer> disciplinas;
+        try {
+            disciplinas = new ArrayList<>();
+
+            String sql = "SELECT * FROM disciplina WHERE curso_fk=?";
+
+            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            stmt.setInt(1, idCurso);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int idDisciplina = rs.getInt("disciplina_fk");
+                disciplinas.add(idDisciplina);
+            }
+
+            rs.close();
+            stmt.close();
+            super.close();
+        } catch (SQLException e) {
+            super.close();
+            throw new DAOException(e);
+        }
+        return disciplinas;
     }
 
 }
