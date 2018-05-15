@@ -9,19 +9,16 @@
         </h3>      
     
     </head>
-    <body>        
+    <body>                        
         <table border="1">
             <tr>
-                <th>Nome</th>
-                <th>CH</th>                
+                <th>Nome</th>                
             </tr>
             <c:forEach items="${disciplinas}" var="disciplina">
-                <tr>
-                    <td>${disciplina.nome}</td>
-                    <td>${disciplina.cargaHoraria}</td>
-                    <td><a href="tarefas?idTurma=${turma.idTurma}&idDisciplina=${disciplina.idDisciplina}">Tarefas</a>                
+                <tr>                                                         
+                    <td><a href="tarefas?idTurma=${turma.idTurma}&idDisciplina=${disciplina.idDisciplina}">${disciplina.nome}</a>                                
                 </tr>
             </c:forEach>
-        </table>                
+        </table>                            
     </body>
 </html>

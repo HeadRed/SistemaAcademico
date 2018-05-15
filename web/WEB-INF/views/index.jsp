@@ -22,16 +22,8 @@
     </head>
     <body class="text-center"> 
         <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-            <header class="masthead mb-auto">
-                <div class="inner">
-                    <h3 class="masthead-brand">Sistema Academico</h3>
-                    <nav class="nav nav-masthead justify-content-center">
-                        <a class="nav-link active" href="index.jsp">Home</a>
-                        <a class="nav-link" href="cabecalho.jsp">Cabeçalho</a>
-                        <a class="nav-link" href="login.jsp">Login</a>
-                    </nav>
-                </div>
-            </header>
+            
+            <c:import url="cabecalho.jsp"/>
 
             <main role="main" class="inner cover">
                 <h1 class="cover-heading">Sistema Academico</h1>
@@ -41,11 +33,8 @@
                 </p>
             </main>
 
-            <footer class="mastfoot mt-auto">
-                <div class="inner">
-                    <p>Disponivel em <a href="https://github.com/henrique-dev/SistemaAcademico">GitHub</a>, por <a href="https://twitter.com/mendessmatheus">@mendessmatheus</a> e <a href="https://github.com/henrique-dev">@Henrique-dev</a>.</p>
-                </div>
-            </footer>
+            <c:import url="rodape.jsp"/>
+            
         </div>
     </body>
 </html>

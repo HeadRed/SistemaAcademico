@@ -11,6 +11,7 @@ import br.com.phdev.sistemaacademico.modelos.Aluno;
 import br.com.phdev.sistemaacademico.modelos.Usuario;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -31,7 +32,7 @@ public class LoginController {
     }
     
     @RequestMapping("autenticar")
-    public String autenticar(Usuario usuario, HttpSession session) {   
+    public String autenticar(Usuario usuario, HttpSession session, Model model) {   
         UsuarioDAO dao = new UsuarioDAO(new ConnectionFactory().getConnection());
         Usuario novoUsuario = dao.verificarExistencia(usuario);
         if (novoUsuario != null) {                        
@@ -42,7 +43,8 @@ public class LoginController {
                 return "redirect:home";
             }
         }
-        return "redirect:entrar";
+        model.addAttribute("erro", true);
+        return "login/form-login";
     }
     
 }

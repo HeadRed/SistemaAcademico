@@ -1,5 +1,5 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<h4>
-    Criado por RedHead. <a href="mailto:henrique.phgb@gmail.com">contato</a>
-</h4>
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+        <p>Disponivel em <a href="https://github.com/henrique-dev/SistemaAcademico">GitHub</a>, por <a href="https://twitter.com/mendessmatheus">@mendessmatheus</a> e <a href="https://github.com/henrique-dev">@Henrique-dev</a>.</p>
+    </div>
+</footer>

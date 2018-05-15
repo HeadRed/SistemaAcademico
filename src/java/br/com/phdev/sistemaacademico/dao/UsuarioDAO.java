@@ -16,48 +16,59 @@ import java.sql.SQLException;
  *
  * @author Paulo Henrique Gonçalves Bacelar
  */
-public class UsuarioDAO extends BasicDAO{    
+public class UsuarioDAO extends BasicDAO {
 
     public UsuarioDAO(Connection conexao) {
-        super(conexao);        
+        super(conexao);
     }
 
-    public Usuario verificarExistencia(Usuario usuario) {        
-        try {
-            String sql = "SELECT * FROM usuario WHERE loginUsuario=?";
-
+    public Usuario verificarExistencia(Usuario usuario) {
+        try {            
+            String tipo = getTipoUsuario(usuario.getLoginNome());
+            if (tipo == null)
+                return null;
+            String sql = "SELECT * FROM " + tipo + " WHERE loginUsuario=? AND loginSenha=?";
             PreparedStatement stmt = super.conexao.prepareStatement(sql);
             stmt.setString(1, usuario.getLoginNome());
-
+            stmt.setString(2, usuario.getLoginSenha());
             ResultSet rs = stmt.executeQuery();
-
             if (rs.next()) {
-                String tipo = rs.getString("tipoUsuario_fk");
-                System.err.println(tipo);
-                sql = "SELECT * FROM " + tipo + " WHERE loginUsuario=? AND loginSenha=?";
-                stmt = super.conexao.prepareStatement(sql);
-                stmt.setString(1, usuario.getLoginNome());
-                stmt.setString(2, usuario.getLoginSenha());
-                rs = stmt.executeQuery();
-                if (rs.next()) {                    
-                    if (tipo.equals("aluno")) {                        
-                        String loginNome = usuario.getLoginNome();
-                        String nome = rs.getString("nome");
-                        int turma = rs.getInt("turma_fk");
-                        rs.close();
-                        stmt.close();
-                        super.close();
-                        return new Aluno(loginNome, nome, turma);
-                    } else if (tipo.equals("professor")) {
-                        
-                    } else if (tipo.equals("administrador")) {
-                        
-                    }
+                if (tipo.equals("aluno")) {
+                    String loginNome = usuario.getLoginNome();
+                    String nome = rs.getString("nome");
+                    int turma = rs.getInt("turma_fk");
+                    rs.close();
+                    stmt.close();
+                    super.close();
+                    return new Aluno(loginNome, nome, turma);
+                } else if (tipo.equals("professor")) {
+
+                } else if (tipo.equals("administrador")) {
+
                 }
-            }            
+            }
         } catch (SQLException e) {
-            super.close();                
+            super.close();
             throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    private String getTipoUsuario(String loginNome) {
+        StringBuilder buffer = new StringBuilder();
+        for (int i = 0; i < loginNome.length(); i++) {
+            if (loginNome.charAt(i) == '@') {
+                for (int j = i + 1; j < loginNome.length(); j++) {
+                    buffer.append(loginNome.charAt(j));
+                }
+                String tipo = buffer.toString();
+                if (tipo.equals("aluno")
+                        || tipo.equals("professor")
+                        || tipo.equals("administrador")) {
+                    return tipo;
+                }
+                return null;
+            }
         }
         return null;
     }
