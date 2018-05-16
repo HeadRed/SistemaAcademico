@@ -45,6 +45,9 @@ insert into aluno values
 	('lohran@aluno', 'lohran', 'Lohran Albuquerque', 4),
 	('jose@aluno', 'jose', 'Jose Augusto', 4);
 	
+insert into administrador values
+	('adm@administrador', 'root', 'mr.robot');
+	
 insert into tarefa values
 	(0, 'Calcular a massa do Sol', false, 'thiago@professor', 4, 4),
 	(1, 'Engenharia reversa do windows', false, 'lucas@professor', 4, 1);

@@ -5,11 +5,15 @@
  */
 package br.com.phdev.sistemaacademico.dao;
 
+import br.com.phdev.sistemaacademico.jdbc.ConnectionFactory;
+import br.com.phdev.sistemaacademico.modelos.Curso;
 import br.com.phdev.sistemaacademico.modelos.Turma;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,7 +25,41 @@ public class TurmaDAO extends BasicDAO {
         super(conexao);
     }
 
-    public Turma get(int idTurma) {
+    public List<Turma> getTurmas() {
+        List<Turma> turmas = null;
+        try {
+            turmas = new ArrayList<>();
+            
+            String sql = "SELECT * FROM turma";
+
+            PreparedStatement stmt = super.conexao.prepareStatement(sql);            
+
+            ResultSet rs = stmt.executeQuery();
+            
+            List<Curso> cursos = new CursoDAO(new ConnectionFactory().getConnection()).getCursos();
+            
+            while (rs.next()) {
+                Turma turma = new Turma();
+                turma.setIdTurma(rs.getInt("idTurma"));                
+                int idCurso = rs.getInt("curso_fk");
+                for (Curso curso : cursos) {
+                    if (curso.getIdCurso() == idCurso)
+                        turma.setCurso(curso.getNome());
+                }
+                turma.setSemestre(rs.getInt("semestre"));                
+                turmas.add(turma);
+            }
+            rs.close();
+            stmt.close();
+            super.close();
+            return turmas;
+        } catch (SQLException e) {
+            super.close();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Turma getTurma(int idTurma) {
         Turma turma = null;
         try {
             String sql = "SELECT * FROM turma WHERE idTurma=?";
@@ -30,22 +68,27 @@ public class TurmaDAO extends BasicDAO {
             stmt.setInt(1, idTurma);
 
             ResultSet rs = stmt.executeQuery();
+            
+            List<Curso> cursos = new CursoDAO(new ConnectionFactory().getConnection()).getCursos();
 
             turma = new Turma();
-            if (rs.next()) {               
+            if (rs.next()) {
                 turma.setIdTurma(idTurma);
-                turma.setCurso(rs.getString("curso_fk"));
                 turma.setSemestre(rs.getInt("semestre"));
+                int idCurso = rs.getInt("curso_fk");                
+                for (Curso curso : cursos) {
+                    if (curso.getIdCurso() == idCurso)
+                        turma.setCurso(curso.getNome());
+                }
                 rs.close();
                 stmt.close();
-                super.close();
                 return turma;
             }
             return turma;
         } catch (SQLException e) {
             super.close();
             throw new RuntimeException(e);
-        }        
+        }
     }
 
 }

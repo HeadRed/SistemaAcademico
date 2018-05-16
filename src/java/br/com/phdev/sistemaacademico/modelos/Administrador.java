@@ -9,19 +9,13 @@ package br.com.phdev.sistemaacademico.modelos;
  *
  * @author Paulo Henrique Gonçalves Bacelar
  */
-public class Aluno extends Usuario {
+public class Administrador extends Usuario{
     
-    private String nome;
-    private int turma;
+    private String nome;    
     
-    public Aluno() {
-        
-    }
-    
-    public Aluno(String loginNome, String nome, int turma) {
+    public Administrador(String loginNome, String nome) {
         super.setLoginNome(loginNome);
-        this.nome = nome;
-        this.turma = turma;
+        this.nome = nome;        
     }
 
     public String getNome() {
@@ -30,14 +24,6 @@ public class Aluno extends Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public int getTurma() {
-        return turma;
-    }
-
-    public void setTurma(int turma) {
-        this.turma = turma;
     }        
     
 }

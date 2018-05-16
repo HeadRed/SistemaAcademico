@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class BasicDAO {
     
-    protected Connection conexao;
+    protected Connection conexao;        
     
     public BasicDAO(Connection conexao) {
         this.conexao = conexao;

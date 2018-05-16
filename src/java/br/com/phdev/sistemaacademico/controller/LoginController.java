@@ -7,6 +7,7 @@ package br.com.phdev.sistemaacademico.controller;
 
 import br.com.phdev.sistemaacademico.dao.UsuarioDAO;
 import br.com.phdev.sistemaacademico.jdbc.ConnectionFactory;
+import br.com.phdev.sistemaacademico.modelos.Administrador;
 import br.com.phdev.sistemaacademico.modelos.Aluno;
 import br.com.phdev.sistemaacademico.modelos.Professor;
 import br.com.phdev.sistemaacademico.modelos.Usuario;
@@ -43,6 +44,9 @@ public class LoginController {
             } else if (novoUsuario instanceof Professor) {
                 session.setAttribute("professor", (Professor)novoUsuario);
                 return "redirect:homeProfessor";
+            } else if (novoUsuario instanceof Administrador) {
+                session.setAttribute("administrador", (Administrador)novoUsuario);
+                return "redirect:homeAdministrador";
             }
         }
         model.addAttribute("erro", true);

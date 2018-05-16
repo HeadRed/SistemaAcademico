@@ -49,6 +49,35 @@ public class CursoDAO extends BasicDAO {
         return curso;
     }
 
+    public List<Curso> getCursos() {
+        List<Curso> cursos = null;
+        try {
+            cursos = new ArrayList<>();
+
+            String sql = "select * from curso";
+
+            PreparedStatement stmt = super.conexao.prepareStatement(sql);            
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Curso curso = new Curso();
+                curso.setIdCurso(rs.getInt("idCurso"));
+                curso.setNome(rs.getString("nome"));
+                cursos.add(curso);
+            }
+
+            rs.close();
+            stmt.close();
+            super.close();
+
+        } catch (SQLException e) {
+            super.close();
+            throw new DAOException(e);
+        }
+        return cursos;
+    }
+
     public List<Curso> getCursos(List<Integer> idCursos) {
         List<Curso> cursos = null;
         try {
@@ -94,19 +123,19 @@ public class CursoDAO extends BasicDAO {
 
             ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {                
+            while (rs.next()) {
                 idCursos.add(rs.getInt("curso_fk"));
             }
 
             rs.close();
-            stmt.close();            
-            
+            stmt.close();
+
             return getCursos(idCursos);
-            
+
         } catch (SQLException e) {
             super.close();
             throw new DAOException(e);
-        }        
+        }
     }
 
     private String formatSQL(String key, List<Integer> idCursos) {

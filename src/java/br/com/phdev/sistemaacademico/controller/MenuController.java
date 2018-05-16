@@ -9,6 +9,7 @@ import br.com.phdev.sistemaacademico.dao.CursoDAO;
 import br.com.phdev.sistemaacademico.dao.DisciplinaDAO;
 import br.com.phdev.sistemaacademico.dao.TurmaDAO;
 import br.com.phdev.sistemaacademico.jdbc.ConnectionFactory;
+import br.com.phdev.sistemaacademico.modelos.Administrador;
 import br.com.phdev.sistemaacademico.modelos.Aluno;
 import br.com.phdev.sistemaacademico.modelos.Curso;
 import br.com.phdev.sistemaacademico.modelos.Disciplina;
@@ -37,7 +38,7 @@ public class MenuController {
     @RequestMapping("homeAluno")
     public String homeAluno(HttpSession session, Model model) {
         Aluno aluno = (Aluno)session.getAttribute("aluno");               
-        Turma turma = new TurmaDAO(new ConnectionFactory().getConnection()).get(aluno.getTurma());     
+        Turma turma = new TurmaDAO(new ConnectionFactory().getConnection()).getTurma(aluno.getTurma());     
         List<Disciplina> lista = new DisciplinaDAO(new ConnectionFactory().getConnection()).getLista(turma);
         model.addAttribute("turma", turma);
         model.addAttribute("aluno", aluno);
@@ -54,6 +55,12 @@ public class MenuController {
         model.addAttribute("cursos", cursos);
         model.addAttribute("nome", professor.getNome());
         return "principal/home-professor";
+    }
+    
+    @RequestMapping("homeAdministrador")
+    public String homeAdministrador(HttpSession session, Model model) {
+//        Administrador administrador = (Administrador)session.getAttribute("administrador");                
+        return "principal/home-administrador";
     }
     
     @RequestMapping("mostrarDisciplinas")
