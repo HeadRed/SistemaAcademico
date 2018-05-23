@@ -22,6 +22,52 @@
             Semestre atual do aluno: ${turma.semestre} <br />
             Curso: ${turma.curso} <br />
             </h3>
+        <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Professor</th>
+                        <th scope="col">Atividade</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Acessar disciplina</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                                <td>Quele Quiroz</td>
+                                <td><c:forEach items="${disciplinas}" var="disciplina">
+                                <tr>                                                         
+                                <td><a href="tarefas?idTurma=${turma.idTurma}&idDisciplina=${disciplina.idDisciplina}">${disciplina.nome}</a>                                
+                                </tr>
+                                </c:forEach></td>
+                                
+                                <td>Integrais definidas</td>
+                                <td><a href="#" class="badge badge-secondary">Entrar</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                                <td>Alan David</td>
+                                <td>Banco de dados</td>
+                                <td>Modelagem</td>
+                                <td><a href="#" class="badge badge-secondary">Entrar</a></td>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                                <td>Marco Antonio</td>
+                                <td>Redes de computadores</td>
+                                <td>Pacotes</td>
+                                <td><a href="#" class="badge badge-secondary">Entrar</a></td>
+                        </tr>
+                    </tbody>
+            </table>
+
+
+
+
+
+
         <table border="1">
             <tr>
                 <th>Nome</th>                
