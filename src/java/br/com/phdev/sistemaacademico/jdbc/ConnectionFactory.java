@@ -3,6 +3,8 @@ package br.com.phdev.sistemaacademico.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +14,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Paulo Henrique Gonçalves Bacelar
+ * @author Paulo Henrique Gonçalves Bacelar 
  */
 public class ConnectionFactory {
     
@@ -26,6 +28,14 @@ public class ConnectionFactory {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }               
+    }             
+    
+    public static void disconnect(Connection con) {
+        try {
+            con.close();
+        } catch (SQLException e) {
+             throw new RuntimeException(e);
+        } 
+    }
     
 }

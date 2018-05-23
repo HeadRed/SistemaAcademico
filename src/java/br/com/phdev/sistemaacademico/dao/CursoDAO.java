@@ -18,10 +18,12 @@ import java.util.List;
  *
  * @author Paulo Henrique Gonçalves Bacelar
  */
-public class CursoDAO extends BasicDAO {
+public class CursoDAO {
+    
+    private Connection conexao;
 
     public CursoDAO(Connection conexao) {
-        super(conexao);
+        this.conexao = conexao;
     }
 
     public Curso getCurso(int idCurso) {
@@ -29,7 +31,7 @@ public class CursoDAO extends BasicDAO {
         try {
             String sql = "SELECT nome FROM curso WHERE idCurso=?";
 
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, idCurso);
 
             ResultSet rs = stmt.executeQuery();
@@ -40,10 +42,8 @@ public class CursoDAO extends BasicDAO {
                 curso.setNome(rs.getString("nome"));
             }
             rs.close();
-            stmt.close();
-            super.close();
-        } catch (SQLException e) {
-            super.close();
+            stmt.close();            
+        } catch (SQLException e) {            
             throw new DAOException(e);
         }
         return curso;
@@ -56,7 +56,7 @@ public class CursoDAO extends BasicDAO {
 
             String sql = "select * from curso";
 
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);            
+            PreparedStatement stmt = conexao.prepareStatement(sql);            
 
             ResultSet rs = stmt.executeQuery();
 
@@ -68,11 +68,9 @@ public class CursoDAO extends BasicDAO {
             }
 
             rs.close();
-            stmt.close();
-            super.close();
+            stmt.close();           
 
-        } catch (SQLException e) {
-            super.close();
+        } catch (SQLException e) {           
             throw new DAOException(e);
         }
         return cursos;
@@ -85,7 +83,7 @@ public class CursoDAO extends BasicDAO {
 
             String sql = "select * from curso where " + formatSQL("idCurso=?", idCursos);
 
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             for (int i = 0; i < idCursos.size(); i++) {
                 stmt.setInt(i + 1, idCursos.get(i));
             }
@@ -100,11 +98,9 @@ public class CursoDAO extends BasicDAO {
             }
 
             rs.close();
-            stmt.close();
-            super.close();
+            stmt.close();            
 
-        } catch (SQLException e) {
-            super.close();
+        } catch (SQLException e) {            
             throw new DAOException(e);
         }
         return cursos;
@@ -116,7 +112,7 @@ public class CursoDAO extends BasicDAO {
             idCursos = new ArrayList<>();
             String sql = "SELECT curso_fk from disciplina WHERE " + formatSQL("idDisciplina=?", idDisciplinas);
 
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             for (int i = 0; i < idDisciplinas.size(); i++) {
                 stmt.setInt(i + 1, idDisciplinas.get(i));
             }
@@ -132,8 +128,7 @@ public class CursoDAO extends BasicDAO {
 
             return getCursos(idCursos);
 
-        } catch (SQLException e) {
-            super.close();
+        } catch (SQLException e) {            
             throw new DAOException(e);
         }
     }

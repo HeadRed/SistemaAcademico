@@ -16,6 +16,7 @@ public class Disciplina {
     private int cargaHoraria;
     private int semestre;
     private String curso;
+    private String professor;
 
     public int getIdDisciplina() {
         return idDisciplina;
@@ -56,7 +57,13 @@ public class Disciplina {
     public void setCurso(String curso) {
         this.curso = curso;
     }
-    
-    
+
+    public String getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(String professor) {
+        this.professor = professor;
+    }        
     
 }

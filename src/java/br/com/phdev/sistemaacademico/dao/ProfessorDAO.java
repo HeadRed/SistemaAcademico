@@ -7,39 +7,44 @@ package br.com.phdev.sistemaacademico.dao;
 
 import br.com.phdev.sistemaacademico.exceptions.DAOException;
 import br.com.phdev.sistemaacademico.modelos.Aluno;
+import br.com.phdev.sistemaacademico.modelos.Professor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
  *
  * @author Paulo Henrique Gonçalves Bacelar
  */
-public class AlunoDAO {        
+public class ProfessorDAO {
     
     private Connection conexao;
     
-    public AlunoDAO(Connection conexao) {
+    public ProfessorDAO(Connection conexao) {
         this.conexao = conexao;
     }
     
-    public void adiciona(Aluno aluno) {
+    public Professor getProfessor(String loginProfessor) {
+        Professor professor = null;
         try {
-            String sql = "insert into aluno values (?,?,?,?)";
+            String sql = "select nome from professor where loginUsuario=?";
             
-            PreparedStatement stmt = conexao.prepareStatement(sql);
-            stmt.setString(1, aluno.getLoginNome());
-            stmt.setString(2, aluno.getLoginSenha());
-            stmt.setString(3, aluno.getNome());
-            stmt.setInt(4, aluno.getTurma());
+            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            stmt.setString(1, loginProfessor);
             
-            stmt.execute();
+            ResultSet rs = stmt.executeQuery();
             
-            stmt.close();
-            
+            if (rs.next()) {
+                professor = new Professor();
+                professor.setNome(rs.getString("nome"));
+            }
+            rs.close();
+            stmt.close();            
         } catch (SQLException e) {
             throw new DAOException(e);
         }
+        return professor;
     }
     
 }

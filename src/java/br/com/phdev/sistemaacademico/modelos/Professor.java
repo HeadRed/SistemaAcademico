@@ -13,6 +13,14 @@ public class Professor extends Usuario{
     
     private String nome;
     
+    public Professor() {
+        
+    }
+    
+    public Professor(String nome) {
+        this.nome = nome;
+    }
+    
     public Professor(String loginNome, String nome) {
         super.setLoginNome(loginNome);
         this.nome = nome;        

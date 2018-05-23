@@ -17,10 +17,12 @@ import java.util.List;
  *
  * @author Paulo Henrique Gonçalves Bacelar
  */
-public class TarefaDAO extends BasicDAO{        
+public class TarefaDAO {        
+    
+    private Connection conexao;
 
     public TarefaDAO(Connection conexao) {
-        super(conexao);
+        this.conexao = conexao;
     }
     
     public List<Tarefa> get(int idTurma, int idDisciplina) {
@@ -29,7 +31,7 @@ public class TarefaDAO extends BasicDAO{
             
             String sql = "SELECT nome, concluida FROM tarefa WHERE turma_fk=? AND disciplina_fk=?";
             
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, idTurma);
             stmt.setInt(2, idDisciplina);
             
@@ -43,8 +45,7 @@ public class TarefaDAO extends BasicDAO{
             }
             
             rs.close();
-            stmt.close();
-            super.close();
+            stmt.close();            
             return tarefas;            
         } catch (SQLException e) {
             throw new RuntimeException(e);

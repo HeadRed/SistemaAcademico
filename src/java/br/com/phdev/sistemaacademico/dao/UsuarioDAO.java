@@ -18,19 +18,21 @@ import java.sql.SQLException;
  *
  * @author Paulo Henrique Gonçalves Bacelar
  */
-public class UsuarioDAO extends BasicDAO {
+public class UsuarioDAO {
+    
+    private Connection conexao;
 
     public UsuarioDAO(Connection conexao) {
-        super(conexao);
+        this.conexao = conexao;
     }
 
     public Usuario verificarExistencia(Usuario usuario) {
-        try {            
+        try {                                               
             String tipo = getTipoUsuario(usuario.getLoginNome());
             if (tipo == null)
                 return null;
             String sql = "SELECT * FROM " + tipo + " WHERE loginUsuario=? AND loginSenha=?";
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, usuario.getLoginNome());
             stmt.setString(2, usuario.getLoginSenha());
             ResultSet rs = stmt.executeQuery();
@@ -40,27 +42,23 @@ public class UsuarioDAO extends BasicDAO {
                     String nome = rs.getString("nome");
                     int turma = rs.getInt("turma_fk");
                     rs.close();
-                    stmt.close();
-                    super.close();
+                    stmt.close();                    
                     return new Aluno(loginNome, nome, turma);
                 } else if (tipo.equals("professor")) {
                     String loginNome = usuario.getLoginNome();
                     String nome = rs.getString("nome");
                     rs.close();
-                    stmt.close();
-                    super.close();
+                    stmt.close();                    
                     return new Professor(loginNome, nome);
                 } else if (tipo.equals("administrador")) {
                     String loginNome = usuario.getLoginNome();
                     String nome = rs.getString("nome");
                     rs.close();
-                    stmt.close();
-                    super.close();
+                    stmt.close();                    
                     return new Administrador(loginNome, nome);
                 }
             }
-        } catch (SQLException e) {
-            super.close();
+        } catch (SQLException e) {            
             throw new RuntimeException(e);
         }
         return null;

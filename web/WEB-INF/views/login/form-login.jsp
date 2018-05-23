@@ -15,7 +15,7 @@
     </head>
     <body class="text-center"> 
         
-        <c:import url="../cabecalho.jsp"/>
+        <!--c:import url="../cabecalho.jsp"/-->
         
         <form class="form-signin" action="autenticar" method="post">                                    
             <img class="mb-4" src="https://blog.clippingcacd.com.br/wp-content/uploads/2015/08/Imagem_para_texto_Bruno.png" alt="" width="72" height="72">
@@ -38,7 +38,7 @@
             <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
         </form>
         
-        <c:import url="../rodape.jsp"/>
+        <!--c:import url="../rodape.jsp"/-->
         
     </body>
 </html>

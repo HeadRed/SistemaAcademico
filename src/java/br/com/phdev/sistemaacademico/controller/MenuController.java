@@ -16,6 +16,7 @@ import br.com.phdev.sistemaacademico.modelos.Disciplina;
 import br.com.phdev.sistemaacademico.modelos.Path;
 import br.com.phdev.sistemaacademico.modelos.Professor;
 import br.com.phdev.sistemaacademico.modelos.Turma;
+import java.sql.Connection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -37,9 +38,13 @@ public class MenuController {
     
     @RequestMapping("homeAluno")
     public String homeAluno(HttpSession session, Model model) {
-        Aluno aluno = (Aluno)session.getAttribute("aluno");               
-        Turma turma = new TurmaDAO(new ConnectionFactory().getConnection()).getTurma(aluno.getTurma());     
-        List<Disciplina> lista = new DisciplinaDAO(new ConnectionFactory().getConnection()).getLista(turma);
+        Aluno aluno = (Aluno)session.getAttribute("usuario");        
+        
+        Connection conexao = new ConnectionFactory().getConnection();
+        Turma turma = new TurmaDAO(conexao).getTurma(aluno.getTurma());     
+        List<Disciplina> lista = new DisciplinaDAO(conexao).getLista(turma);
+        ConnectionFactory.disconnect(conexao);
+        
         model.addAttribute("turma", turma);
         model.addAttribute("aluno", aluno);
         model.addAttribute("disciplinas", lista);
@@ -49,9 +54,13 @@ public class MenuController {
     
     @RequestMapping("homeProfessor")
     public String homeProfessor(HttpSession session, Model model) {
-        Professor professor = (Professor)session.getAttribute("professor");        
-        List<Integer> idDisciplinas = new DisciplinaDAO(new ConnectionFactory().getConnection()).getIdDisciplinas(professor.getLoginNome());
-        List<Curso> cursos = new CursoDAO(new ConnectionFactory().getConnection()).getCursosFromDisciplinas(idDisciplinas);                
+        Professor professor = (Professor)session.getAttribute("usuario");        
+        
+        Connection conexao = new ConnectionFactory().getConnection();
+        List<Integer> idDisciplinas = new DisciplinaDAO(conexao).getIdDisciplinas(professor.getLoginNome());
+        List<Curso> cursos = new CursoDAO(conexao).getCursosFromDisciplinas(idDisciplinas);                
+        ConnectionFactory.disconnect(conexao);
+        
         model.addAttribute("cursos", cursos);
         model.addAttribute("nome", professor.getNome());
         return "principal/home-professor";
@@ -65,7 +74,7 @@ public class MenuController {
     
     @RequestMapping("mostrarDisciplinas")
     public String mostrarDisciplinas(int curso, Model model, HttpSession session) {
-        Professor professor = (Professor)session.getAttribute("professor");
+        Professor professor = (Professor)session.getAttribute("usuario");
         List<Disciplina> disciplinas = new DisciplinaDAO(new ConnectionFactory().getConnection()).getDisciplinas(curso, professor);                                
         model.addAttribute("disciplinas", disciplinas);
         return "principal/professor/lista-disciplinas";

@@ -19,10 +19,12 @@ import java.util.List;
  *
  * @author Paulo Henrique Gonçalves Bacelar
  */
-public class TurmaDAO extends BasicDAO {
+public class TurmaDAO {
+    
+    private Connection conexao;
 
     public TurmaDAO(Connection conexao) {
-        super(conexao);
+        this.conexao = conexao;
     }
 
     public List<Turma> getTurmas() {
@@ -32,7 +34,7 @@ public class TurmaDAO extends BasicDAO {
             
             String sql = "SELECT * FROM turma";
 
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);            
+            PreparedStatement stmt = conexao.prepareStatement(sql);            
 
             ResultSet rs = stmt.executeQuery();
             
@@ -50,11 +52,9 @@ public class TurmaDAO extends BasicDAO {
                 turmas.add(turma);
             }
             rs.close();
-            stmt.close();
-            super.close();
+            stmt.close();            
             return turmas;
-        } catch (SQLException e) {
-            super.close();
+        } catch (SQLException e) {            
             throw new RuntimeException(e);
         }
     }
@@ -64,7 +64,7 @@ public class TurmaDAO extends BasicDAO {
         try {
             String sql = "SELECT * FROM turma WHERE idTurma=?";
 
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, idTurma);
 
             ResultSet rs = stmt.executeQuery();
@@ -85,8 +85,7 @@ public class TurmaDAO extends BasicDAO {
                 return turma;
             }
             return turma;
-        } catch (SQLException e) {
-            super.close();
+        } catch (SQLException e) {            
             throw new RuntimeException(e);
         }
     }

@@ -6,6 +6,7 @@
 package br.com.phdev.sistemaacademico.dao;
 
 import br.com.phdev.sistemaacademico.exceptions.DAOException;
+import br.com.phdev.sistemaacademico.jdbc.ConnectionFactory;
 import br.com.phdev.sistemaacademico.modelos.Disciplina;
 import br.com.phdev.sistemaacademico.modelos.Professor;
 import br.com.phdev.sistemaacademico.modelos.Turma;
@@ -20,10 +21,12 @@ import java.util.List;
  *
  * @author Paulo Henrique Gonçalves Bacelar
  */
-public class DisciplinaDAO extends BasicDAO {
+public class DisciplinaDAO {
+    
+    private Connection conexao;
 
     public DisciplinaDAO(Connection conexao) {
-        super(conexao);
+        this.conexao = conexao;
     }
 
     public List<Disciplina> getLista(Turma turma) {
@@ -31,7 +34,7 @@ public class DisciplinaDAO extends BasicDAO {
             List<Disciplina> disciplinas = new ArrayList<>();
             String sql = "SELECT * FROM disciplina WHERE curso_fk=? AND semestre=?";
 
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, turma.getCurso());
             stmt.setInt(2, turma.getSemestre());
 
@@ -44,15 +47,20 @@ public class DisciplinaDAO extends BasicDAO {
                 disciplina.setCargaHoraria(rs.getInt("cargaHoraria"));
                 disciplina.setCurso(rs.getString("curso_fk"));
                 disciplina.setSemestre(turma.getSemestre());
+                String userProfessor = rs.getString("professor_fk");
+                
+                Connection subCon = new ConnectionFactory().getConnection();
+                Professor professor = new ProfessorDAO(subCon).getProfessor(userProfessor);
+                disciplina.setProfessor(professor.getNome());
+                ConnectionFactory.disconnect(subCon);
+                
                 disciplinas.add(disciplina);
             }
 
             rs.close();
-            stmt.close();
-            super.close();
+            stmt.close();            
             return disciplinas;
-        } catch (SQLException e) {
-            super.close();
+        } catch (SQLException e) {            
             throw new DAOException(e);
         }
     }
@@ -62,7 +70,7 @@ public class DisciplinaDAO extends BasicDAO {
             List<Disciplina> disciplinas = new ArrayList<>();
             String sql = "SELECT * FROM disciplina WHERE curso_fk=? and professor_fk=?";
 
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, idCurso);            
             stmt.setString(2, professor.getLoginNome());
 
@@ -77,11 +85,9 @@ public class DisciplinaDAO extends BasicDAO {
             }
 
             rs.close();
-            stmt.close();
-            super.close();
+            stmt.close();            
             return disciplinas;
-        } catch (SQLException e) {
-            super.close();
+        } catch (SQLException e) {            
             throw new DAOException(e);
         }
     }
@@ -93,7 +99,7 @@ public class DisciplinaDAO extends BasicDAO {
 
             String sql = "SELECT * FROM disciplina WHERE professor_fk=?";
 
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, key);
 
             ResultSet rs = stmt.executeQuery();
@@ -104,10 +110,8 @@ public class DisciplinaDAO extends BasicDAO {
             }
 
             rs.close();
-            stmt.close();
-            super.close();
-        } catch (SQLException e) {
-            super.close();
+            stmt.close();            
+        } catch (SQLException e) {            
             throw new DAOException(e);
         }
         return disciplinas;
@@ -120,7 +124,7 @@ public class DisciplinaDAO extends BasicDAO {
 
             String sql = "SELECT * FROM disciplina WHERE curso_fk=?";
 
-            PreparedStatement stmt = super.conexao.prepareStatement(sql);
+            PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, idCurso);
 
             ResultSet rs = stmt.executeQuery();
@@ -131,10 +135,8 @@ public class DisciplinaDAO extends BasicDAO {
             }
 
             rs.close();
-            stmt.close();
-            super.close();
-        } catch (SQLException e) {
-            super.close();
+            stmt.close();           
+        } catch (SQLException e) {            
             throw new DAOException(e);
         }
         return disciplinas;
