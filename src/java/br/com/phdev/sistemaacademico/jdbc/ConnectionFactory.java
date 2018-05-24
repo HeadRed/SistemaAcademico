@@ -20,7 +20,7 @@ public class ConnectionFactory {
     
     public Connection getConnection() {
         try {
-            String url = "jdbc:mysql://localhost:3306/sistema_academico";
+            String url = "jdbc:mysql://192.168.2.140:3306/sistema_academico";
             String usuario = "sistema_academico";
             String senha = "root";
             Class.forName("com.mysql.jdbc.Driver");

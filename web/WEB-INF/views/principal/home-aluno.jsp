@@ -38,7 +38,7 @@
                             <th scope="row">1</th>
                             <td scope="col">${disciplina.professor}</td>                            
                             <td scope="col">${disciplina.nome}</a>                                
-                            <td><p>sei l?/p></td>
+                            <td><p>sei lá</p></td>
                             <td><a class="btn btn-primary" href="tarefas?idTurma=${turma.idTurma}&idDisciplina=${disciplina.idDisciplina}" role="button">Logar</a></td>                        
                         </tr>
                     </c:forEach>                    
