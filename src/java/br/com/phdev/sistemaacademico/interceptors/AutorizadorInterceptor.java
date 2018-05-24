@@ -19,12 +19,12 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
         String uri = request.getRequestURI();
         System.out.println(uri);
-        if (uri.endsWith("entrar") || uri.endsWith("menuEntrar") || uri.endsWith("resources") || uri.endsWith("autenticar") || uri.endsWith("principal"))
-            return true;
+        if (uri.endsWith("entrar") || uri.endsWith("resources") || uri.endsWith("autenticar")
+                || uri.endsWith("principal") || uri.endsWith("index")) {                       
+            return true;            
+        }
         if (request.getSession().getAttribute("usuario") != null) {
             return true;
-        } else {
-            System.out.println("SESSÃO N ENCONTRADA");
         }
         response.sendRedirect("menuEntrar");
         return false;
